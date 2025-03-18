@@ -26,21 +26,125 @@ public class SchedulerGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        MainPanel = new javax.swing.JPanel();
+        TitleLBL = new javax.swing.JLabel();
+        Sep1 = new javax.swing.JSeparator();
+        NextPatientLBL = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        NextPatientTA = new javax.swing.JTextArea();
+        AllPatientsLBL = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        AllPatientsTA = new javax.swing.JTextArea();
+        NextPatientBTN = new javax.swing.JButton();
+        ShowAllPatientsBTN = new javax.swing.JButton();
+        ShowNoShowBTN = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 196, 196));
+
+        MainPanel.setBackground(new java.awt.Color(255, 204, 204));
+
+        TitleLBL.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        TitleLBL.setText("Blood Test Scheduler");
+
+        Sep1.setBackground(new java.awt.Color(0, 0, 0));
+        Sep1.setForeground(new java.awt.Color(255, 255, 255));
+        Sep1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        NextPatientLBL.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        NextPatientLBL.setText("Next Patient:");
+
+        NextPatientTA.setColumns(20);
+        NextPatientTA.setRows(5);
+        jScrollPane1.setViewportView(NextPatientTA);
+
+        AllPatientsLBL.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        AllPatientsLBL.setText("All Patients:");
+
+        AllPatientsTA.setColumns(20);
+        AllPatientsTA.setRows(5);
+        jScrollPane2.setViewportView(AllPatientsTA);
+
+        NextPatientBTN.setText("Next Patient");
+        NextPatientBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NextPatientBTNActionPerformed(evt);
+            }
+        });
+
+        ShowAllPatientsBTN.setText("Show All Patients");
+
+        ShowNoShowBTN.setText("Show last 5 No Shows");
+
+        javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
+        MainPanel.setLayout(MainPanelLayout);
+        MainPanelLayout.setHorizontalGroup(
+            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainPanelLayout.createSequentialGroup()
+                .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(MainPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Sep1))
+                    .addGroup(MainPanelLayout.createSequentialGroup()
+                        .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(MainPanelLayout.createSequentialGroup()
+                                .addGap(171, 171, 171)
+                                .addComponent(TitleLBL))
+                            .addGroup(MainPanelLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(NextPatientBTN)
+                                    .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(NextPatientLBL)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+                                        .addComponent(AllPatientsLBL)
+                                        .addComponent(jScrollPane2))
+                                    .addComponent(ShowAllPatientsBTN)
+                                    .addComponent(ShowNoShowBTN))))
+                        .addGap(0, 16, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        MainPanelLayout.setVerticalGroup(
+            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainPanelLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(TitleLBL)
+                .addGap(18, 18, 18)
+                .addComponent(Sep1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(NextPatientLBL)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(NextPatientBTN)
+                .addGap(25, 25, 25)
+                .addComponent(AllPatientsLBL)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ShowAllPatientsBTN)
+                .addGap(18, 18, 18)
+                .addComponent(ShowNoShowBTN)
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void NextPatientBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextPatientBTNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NextPatientBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +182,17 @@ public class SchedulerGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AllPatientsLBL;
+    private javax.swing.JTextArea AllPatientsTA;
+    private javax.swing.JPanel MainPanel;
+    private javax.swing.JButton NextPatientBTN;
+    private javax.swing.JLabel NextPatientLBL;
+    private javax.swing.JTextArea NextPatientTA;
+    private javax.swing.JSeparator Sep1;
+    private javax.swing.JButton ShowAllPatientsBTN;
+    private javax.swing.JButton ShowNoShowBTN;
+    private javax.swing.JLabel TitleLBL;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
