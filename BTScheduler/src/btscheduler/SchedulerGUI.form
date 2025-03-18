@@ -185,11 +185,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Show All Patients"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ShowAllPatientsBTNActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="ShowNoShowBTN">
           <Properties>
             <Property name="text" type="java.lang.String" value="Show last 5 No Shows"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ShowNoShowBTNActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

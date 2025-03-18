@@ -20,7 +20,7 @@ public class BloodTestScheduler {
             @Override
             public int compare(Patient p1, Patient p2) {
                 // Priority setting Urgent - medium - lwo
-                int priorityCompare = p1.getPriority().compareTo(p2.getPriority());
+                int priorityCompare = p2.getPriority().compareTo(p1.getPriority());
                 if (priorityCompare != 0) return priorityCompare;
 
                 // Comapre ages, oldest first

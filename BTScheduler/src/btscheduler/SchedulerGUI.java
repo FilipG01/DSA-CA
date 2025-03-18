@@ -13,12 +13,17 @@ import btscheduler.Patient;
  */
 public class SchedulerGUI extends javax.swing.JFrame {
     private BloodTestScheduler scheduler;
+    private NoShowTracker noShowTracker;
 
     
     public SchedulerGUI() {
     scheduler = new BloodTestScheduler(); // Initialize scheduler
+    noShowTracker = new NoShowTracker();// Initialize no-show tracker
+    
     initComponents();
+    
     displayAllPatients(); // Load and display all patients when project is ran
+    displayNextPatient(); // Show highest-priority patient in NextPatientTA
 }
     
     private void displayAllPatients() {
@@ -34,6 +39,34 @@ public class SchedulerGUI extends javax.swing.JFrame {
 
     // Update AllPatientsTA TextArea
     AllPatientsTA.setText(sb.toString());
+}
+    
+    private void displayNextPatient() {
+    Patient next = scheduler.peekNextPatient(); // Get highest-priority patient
+
+    if (next != null) {
+        // Display patient details in NextPatientTA
+        NextPatientTA.setText(next.getName() + " - " + next.getPriority() + 
+            " - Age: " + next.getAge() + " - " + 
+            (next.isFromHospital() ? "Hospital" : "GP"));
+    } else {
+        NextPatientTA.setText("No patients in queue.");
+    }
+}
+    
+    private void displayNoShows() {
+    List<Patient> noShows = noShowTracker.getNoShows(); // Get no-show patients
+    StringBuilder sb = new StringBuilder();
+
+    for (Patient p : noShows) {
+        sb.append(p.getName()).append(" - ")
+          .append(p.getPriority()).append(" - ")
+          .append("Age: ").append(p.getAge()).append(" - ")
+          .append(p.isFromHospital() ? "Hospital" : "GP").append("\n");
+    }
+
+    // Update AllPatientsTA textarea
+    AllPatientsTA.setText(sb.length() > 0 ? sb.toString() : "No no-show patients.");
 }
     
     
@@ -89,8 +122,18 @@ public class SchedulerGUI extends javax.swing.JFrame {
         NextPatientBTN.setText("Next Patient");
 
         ShowAllPatientsBTN.setText("Show All Patients");
+        ShowAllPatientsBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ShowAllPatientsBTNActionPerformed(evt);
+            }
+        });
 
         ShowNoShowBTN.setText("Show last 5 No Shows");
+        ShowNoShowBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ShowNoShowBTNActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
@@ -157,6 +200,14 @@ public class SchedulerGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ShowNoShowBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowNoShowBTNActionPerformed
+        displayNoShows();//displays no show patients
+    }//GEN-LAST:event_ShowNoShowBTNActionPerformed
+
+    private void ShowAllPatientsBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowAllPatientsBTNActionPerformed
+        displayAllPatients();//displays all patients
+    }//GEN-LAST:event_ShowAllPatientsBTNActionPerformed
 
     /**
      * @param args the command line arguments

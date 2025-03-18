@@ -13,6 +13,7 @@ import java.util.*;
 
 public class FileIOManager {
     private static final String FILE_PATH = "src/btscheduler/patientInfo/patients.txt";
+    private static final String NOSHOW_FILE_PATH = "src/btscheduler/patientInfo/noshow.txt";
 
     //Load patients from file
     public static List<Patient> loadPatients() {
@@ -48,5 +49,26 @@ public class FileIOManager {
         } catch (IOException e) {
             System.err.println("Error saving patient data: " + e.getMessage());
         }
+    }
+    
+    // Load No-Show Patients
+    public static List<Patient> loadNoShows() {
+        List<Patient> noShows = new ArrayList<>();
+        File file = new File(NOSHOW_FILE_PATH);
+
+        if (!file.exists()) {
+            System.out.println("noshow.txt not found");
+            return noShows;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(NOSHOW_FILE_PATH))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                noShows.add(Patient.fromFileString(line)); // Convert text to Patient object
+            }
+        } catch (IOException e) {
+            System.err.println("Error loading no-show data: " + e.getMessage());
+        }
+        return noShows;
     }
 }

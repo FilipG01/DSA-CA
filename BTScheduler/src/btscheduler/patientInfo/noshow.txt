@@ -1,0 +1,5 @@
+Michael Carter,urgent,70,true,Dr. Johnson
+Sophia Reed,medium,50,false,Dr. Patterson
+David Evans,low,35,false,Dr. Thompson
+Olivia Adams,urgent,60,true,Dr. Miller
+Ethan Brooks,medium,45,false,Dr. Garcia
