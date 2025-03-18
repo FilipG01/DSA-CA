@@ -6,7 +6,7 @@ package btscheduler;
 
 /**
  *
- * @author Pinkp
+ * @author Filip
  */
 public class PatientSorter {
     

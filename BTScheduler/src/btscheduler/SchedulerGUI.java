@@ -3,19 +3,40 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package btscheduler;
+import java.util.List;
+import btscheduler.BloodTestScheduler; 
+import btscheduler.Patient; 
 
 /**
  *
- * @author Pinkp
+ * @author Filip
  */
 public class SchedulerGUI extends javax.swing.JFrame {
+    private BloodTestScheduler scheduler;
 
-    /**
-     * Creates new form SchedulerGUI
-     */
+    
     public SchedulerGUI() {
-        initComponents();
+    scheduler = new BloodTestScheduler(); // Initialize scheduler
+    initComponents();
+    displayAllPatients(); // Load and display all patients when project is ran
+}
+    
+    private void displayAllPatients() {
+    List<Patient> patients = scheduler.getAllPatients(); // Get patients from priority queue
+    StringBuilder sb = new StringBuilder();
+
+    for (Patient p : patients) {
+        sb.append(p.getName()).append(" - ")
+          .append(p.getPriority()).append(" - ")
+          .append("Age: ").append(p.getAge()).append(" - ")
+          .append(p.isFromHospital() ? "Hospital" : "GP").append("\n");
     }
+
+    // Update AllPatientsTA TextArea
+    AllPatientsTA.setText(sb.toString());
+}
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,11 +87,6 @@ public class SchedulerGUI extends javax.swing.JFrame {
         jScrollPane2.setViewportView(AllPatientsTA);
 
         NextPatientBTN.setText("Next Patient");
-        NextPatientBTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NextPatientBTNActionPerformed(evt);
-            }
-        });
 
         ShowAllPatientsBTN.setText("Show All Patients");
 
@@ -141,10 +157,6 @@ public class SchedulerGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void NextPatientBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextPatientBTNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NextPatientBTNActionPerformed
 
     /**
      * @param args the command line arguments
