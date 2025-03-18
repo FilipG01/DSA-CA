@@ -153,7 +153,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Details:"/>
+            <Property name="text" type="java.lang.String" value="Patient Details:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="NameLBL">
@@ -217,6 +217,7 @@
         <Component class="javax.swing.JButton" name="AddBTN">
           <Properties>
             <Property name="text" type="java.lang.String" value="Add Patient"/>
+            <Property name="toolTipText" type="java.lang.String" value="Adds Patient info to patient.txt"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddBTNActionPerformed"/>
@@ -225,6 +226,7 @@
         <Component class="javax.swing.JButton" name="CancelBTN">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancel"/>
+            <Property name="toolTipText" type="java.lang.String" value="Closes window"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CancelBTNActionPerformed"/>

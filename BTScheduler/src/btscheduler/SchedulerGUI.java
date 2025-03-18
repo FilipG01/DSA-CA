@@ -71,6 +71,15 @@ public class SchedulerGUI extends javax.swing.JFrame {
     AllPatientsTA.setText(sb.length() > 0 ? sb.toString() : "No no-show patients.");
 }
     
+    private void displayLastProcessedPatients() {
+    String ProcessedPatients = scheduler.getLastProcessedPatients();
+    if (ProcessedPatients.isEmpty()) {
+        AllPatientsTA.setText("No patients have been Processed yet.");
+    } else {
+        AllPatientsTA.setText("Last Patients Processed:\n" + ProcessedPatients);
+    }
+}
+    
     private void processNextPatient() {
     Patient removedPatient = scheduler.getNextPerson(); // Remove highest-priority patient
 
@@ -118,6 +127,7 @@ public class SchedulerGUI extends javax.swing.JFrame {
         ShowAllPatientsBTN = new javax.swing.JButton();
         ShowNoShowBTN = new javax.swing.JButton();
         AddPatientBTN = new javax.swing.JButton();
+        LastProcessedPatientsBTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 196, 196));
@@ -134,6 +144,7 @@ public class SchedulerGUI extends javax.swing.JFrame {
         NextPatientLBL.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         NextPatientLBL.setText("Next Patient:");
 
+        NextPatientTA.setEditable(false);
         NextPatientTA.setColumns(20);
         NextPatientTA.setRows(5);
         jScrollPane1.setViewportView(NextPatientTA);
@@ -141,6 +152,7 @@ public class SchedulerGUI extends javax.swing.JFrame {
         AllPatientsLBL.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         AllPatientsLBL.setText("All Patients:");
 
+        AllPatientsTA.setEditable(false);
         AllPatientsTA.setColumns(20);
         AllPatientsTA.setRows(5);
         jScrollPane2.setViewportView(AllPatientsTA);
@@ -162,16 +174,26 @@ public class SchedulerGUI extends javax.swing.JFrame {
         });
 
         ShowNoShowBTN.setText("Show last 5 No Shows");
+        ShowNoShowBTN.setToolTipText("Displays the last 5 no show patients");
         ShowNoShowBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ShowNoShowBTNActionPerformed(evt);
             }
         });
 
-        AddPatientBTN.setText("Opens Add Patient window");
+        AddPatientBTN.setText("Add Patient");
+        AddPatientBTN.setToolTipText("Opens Add Patient window");
         AddPatientBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddPatientBTNActionPerformed(evt);
+            }
+        });
+
+        LastProcessedPatientsBTN.setText("Show last processed patients");
+        LastProcessedPatientsBTN.setToolTipText("Shows last processes patients");
+        LastProcessedPatientsBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LastProcessedPatientsBTNActionPerformed(evt);
             }
         });
 
@@ -185,26 +207,27 @@ public class SchedulerGUI extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(Sep1))
                     .addGroup(MainPanelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ShowAllPatientsBTN)
+                            .addComponent(ShowNoShowBTN)
                             .addGroup(MainPanelLayout.createSequentialGroup()
-                                .addGap(171, 171, 171)
-                                .addComponent(TitleLBL))
+                                .addComponent(NextPatientBTN)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(AddPatientBTN))
+                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane2)
                             .addGroup(MainPanelLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ShowAllPatientsBTN)
-                                    .addComponent(ShowNoShowBTN)
-                                    .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(MainPanelLayout.createSequentialGroup()
-                                            .addComponent(NextPatientBTN)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
-                                            .addComponent(AddPatientBTN))
-                                        .addComponent(NextPatientLBL, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(AllPatientsLBL, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)))))
-                        .addGap(0, 17, Short.MAX_VALUE)))
+                                .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(NextPatientLBL, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(AllPatientsLBL, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(LastProcessedPatientsBTN))))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPanelLayout.createSequentialGroup()
+                .addGap(0, 135, Short.MAX_VALUE)
+                .addComponent(TitleLBL)
+                .addGap(127, 127, 127))
         );
         MainPanelLayout.setVerticalGroup(
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,7 +252,9 @@ public class SchedulerGUI extends javax.swing.JFrame {
                 .addComponent(ShowAllPatientsBTN)
                 .addGap(18, 18, 18)
                 .addComponent(ShowNoShowBTN)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(LastProcessedPatientsBTN)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -261,6 +286,10 @@ public class SchedulerGUI extends javax.swing.JFrame {
     private void AddPatientBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddPatientBTNActionPerformed
         openAddPatientForm();//opens joption pane for adding patient details to txtfile and program
     }//GEN-LAST:event_AddPatientBTNActionPerformed
+
+    private void LastProcessedPatientsBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LastProcessedPatientsBTNActionPerformed
+        displayLastProcessedPatients();//Displays last patients to be processed (removed)
+    }//GEN-LAST:event_LastProcessedPatientsBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,6 +330,7 @@ public class SchedulerGUI extends javax.swing.JFrame {
     private javax.swing.JButton AddPatientBTN;
     private javax.swing.JLabel AllPatientsLBL;
     private javax.swing.JTextArea AllPatientsTA;
+    private javax.swing.JButton LastProcessedPatientsBTN;
     private javax.swing.JPanel MainPanel;
     private javax.swing.JButton NextPatientBTN;
     private javax.swing.JLabel NextPatientLBL;

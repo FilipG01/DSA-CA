@@ -52,35 +52,35 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="Sep1" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="171" max="-2" attributes="0"/>
-                                  <Component id="TitleLBL" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="ShowAllPatientsBTN" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="ShowNoShowBTN" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="ShowAllPatientsBTN" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ShowNoShowBTN" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="NextPatientBTN" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="263" max="32767" attributes="0"/>
-                                              <Component id="AddPatientBTN" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="NextPatientLBL" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="AllPatientsLBL" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <Component id="NextPatientBTN" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="AddPatientBTN" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="NextPatientLBL" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="AllPatientsLBL" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="LastProcessedPatientsBTN" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="17" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="135" max="32767" attributes="0"/>
+                  <Component id="TitleLBL" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -108,7 +108,9 @@
                   <Component id="ShowAllPatientsBTN" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="ShowNoShowBTN" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="60" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="LastProcessedPatientsBTN" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="19" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -154,6 +156,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextArea" name="NextPatientTA">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
               </Properties>
@@ -177,6 +180,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextArea" name="AllPatientsTA">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
               </Properties>
@@ -204,6 +208,7 @@
         <Component class="javax.swing.JButton" name="ShowNoShowBTN">
           <Properties>
             <Property name="text" type="java.lang.String" value="Show last 5 No Shows"/>
+            <Property name="toolTipText" type="java.lang.String" value="Displays the last 5 no show patients"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ShowNoShowBTNActionPerformed"/>
@@ -211,10 +216,20 @@
         </Component>
         <Component class="javax.swing.JButton" name="AddPatientBTN">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Opens Add Patient window"/>
+            <Property name="text" type="java.lang.String" value="Add Patient"/>
+            <Property name="toolTipText" type="java.lang.String" value="Opens Add Patient window"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddPatientBTNActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="LastProcessedPatientsBTN">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Show last processed patients"/>
+            <Property name="toolTipText" type="java.lang.String" value="Shows last processes patients"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LastProcessedPatientsBTNActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

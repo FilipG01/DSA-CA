@@ -1,0 +1,11 @@
+Alice Johnson,medium,55,false,Dr. Patel
+Robert White,low,38,false,Dr. Harris
+Emily Davis,urgent,65,true,Dr. Thompson
+Michael Carter,medium,50,false,Dr. Lewis
+Sophia Reed,low,30,false,Dr. Walker
+Olivia Adams,medium,40,false,Dr. Martin
+Ethan Brooks,low,29,false,Dr. Campbell
+Daniel Turner,medium,47,false,Dr. King
+Grace Foster,low,33,false,Dr. Wright
+Charlotte Bell,medium,58,false,Dr. Hall
+Henry Bennett,low,42,false,Dr. Young

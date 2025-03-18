@@ -55,7 +55,7 @@ public class AddPatientForm extends javax.swing.JFrame {
         TitleLBL.setText("Add New Patient");
 
         DetailsLBL.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        DetailsLBL.setText("Details:");
+        DetailsLBL.setText("Patient Details:");
 
         NameLBL.setText("Name:");
 
@@ -72,6 +72,7 @@ public class AddPatientForm extends javax.swing.JFrame {
         HospitalPatientCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yes", "No" }));
 
         AddBTN.setText("Add Patient");
+        AddBTN.setToolTipText("Adds Patient info to patient.txt");
         AddBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddBTNActionPerformed(evt);
@@ -79,6 +80,7 @@ public class AddPatientForm extends javax.swing.JFrame {
         });
 
         CancelBTN.setText("Cancel");
+        CancelBTN.setToolTipText("Closes window");
         CancelBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelBTNActionPerformed(evt);
