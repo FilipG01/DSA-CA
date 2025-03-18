@@ -14,11 +14,13 @@ import btscheduler.Patient;
 public class SchedulerGUI extends javax.swing.JFrame {
     private BloodTestScheduler scheduler;
     private NoShowTracker noShowTracker;
+    private AddPatientForm addPatientForm; // Store instance of Joption pane
 
     
     public SchedulerGUI() {
     scheduler = new BloodTestScheduler(); // Initialize scheduler
     noShowTracker = new NoShowTracker();// Initialize no-show tracker
+    addPatientForm = new AddPatientForm(this); // Initialize Joption pane but keep it hidden
     
     initComponents();
     
@@ -26,7 +28,7 @@ public class SchedulerGUI extends javax.swing.JFrame {
     displayNextPatient(); // Show highest-priority patient in NextPatientTA
 }
     
-    private void displayAllPatients() {
+    public void displayAllPatients() {
     List<Patient> patients = scheduler.getAllPatients(); // Get patients from priority queue
     StringBuilder sb = new StringBuilder();
 
@@ -41,7 +43,7 @@ public class SchedulerGUI extends javax.swing.JFrame {
     AllPatientsTA.setText(sb.toString());
 }
     
-    private void displayNextPatient() {
+    public void displayNextPatient() {
     Patient next = scheduler.peekNextPatient(); // Get highest-priority patient
 
     if (next != null) {
@@ -69,6 +71,29 @@ public class SchedulerGUI extends javax.swing.JFrame {
     AllPatientsTA.setText(sb.length() > 0 ? sb.toString() : "No no-show patients.");
 }
     
+    private void processNextPatient() {
+    Patient removedPatient = scheduler.getNextPerson(); // Remove highest-priority patient
+
+    if (removedPatient != null) {
+        // Display next patient (if available)
+        displayNextPatient();
+
+        // Update patient list in AllPatientsTA
+        displayAllPatients();
+    } else {
+        // If no patients are left, show a message
+        NextPatientTA.setText("No more patients in queue.");
+    }
+}
+    
+    private void openAddPatientForm() {
+    addPatientForm.setVisible(true); // Make pop-up window visible when button is clicked
+}
+    
+    public BloodTestScheduler getScheduler() {
+    return scheduler;
+}
+    
     
 
     /**
@@ -92,6 +117,7 @@ public class SchedulerGUI extends javax.swing.JFrame {
         NextPatientBTN = new javax.swing.JButton();
         ShowAllPatientsBTN = new javax.swing.JButton();
         ShowNoShowBTN = new javax.swing.JButton();
+        AddPatientBTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 196, 196));
@@ -119,9 +145,16 @@ public class SchedulerGUI extends javax.swing.JFrame {
         AllPatientsTA.setRows(5);
         jScrollPane2.setViewportView(AllPatientsTA);
 
-        NextPatientBTN.setText("Next Patient");
+        NextPatientBTN.setText("Patient Processed");
+        NextPatientBTN.setToolTipText("Deletes Selected Patient");
+        NextPatientBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NextPatientBTNActionPerformed(evt);
+            }
+        });
 
         ShowAllPatientsBTN.setText("Show All Patients");
+        ShowAllPatientsBTN.setToolTipText("Displays all users in pqueue");
         ShowAllPatientsBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ShowAllPatientsBTNActionPerformed(evt);
@@ -132,6 +165,13 @@ public class SchedulerGUI extends javax.swing.JFrame {
         ShowNoShowBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ShowNoShowBTNActionPerformed(evt);
+            }
+        });
+
+        AddPatientBTN.setText("Opens Add Patient window");
+        AddPatientBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddPatientBTNActionPerformed(evt);
             }
         });
 
@@ -152,15 +192,18 @@ public class SchedulerGUI extends javax.swing.JFrame {
                             .addGroup(MainPanelLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(NextPatientBTN)
-                                    .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(NextPatientLBL)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
-                                        .addComponent(AllPatientsLBL)
-                                        .addComponent(jScrollPane2))
                                     .addComponent(ShowAllPatientsBTN)
-                                    .addComponent(ShowNoShowBTN))))
-                        .addGap(0, 16, Short.MAX_VALUE)))
+                                    .addComponent(ShowNoShowBTN)
+                                    .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(MainPanelLayout.createSequentialGroup()
+                                            .addComponent(NextPatientBTN)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
+                                            .addComponent(AddPatientBTN))
+                                        .addComponent(NextPatientLBL, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(AllPatientsLBL, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)))))
+                        .addGap(0, 17, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         MainPanelLayout.setVerticalGroup(
@@ -175,7 +218,9 @@ public class SchedulerGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(NextPatientBTN)
+                .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NextPatientBTN)
+                    .addComponent(AddPatientBTN))
                 .addGap(25, 25, 25)
                 .addComponent(AllPatientsLBL)
                 .addGap(18, 18, 18)
@@ -208,6 +253,14 @@ public class SchedulerGUI extends javax.swing.JFrame {
     private void ShowAllPatientsBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowAllPatientsBTNActionPerformed
         displayAllPatients();//displays all patients
     }//GEN-LAST:event_ShowAllPatientsBTNActionPerformed
+
+    private void NextPatientBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextPatientBTNActionPerformed
+        processNextPatient();//removes currently displayed patient
+    }//GEN-LAST:event_NextPatientBTNActionPerformed
+
+    private void AddPatientBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddPatientBTNActionPerformed
+        openAddPatientForm();//opens joption pane for adding patient details to txtfile and program
+    }//GEN-LAST:event_AddPatientBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,6 +298,7 @@ public class SchedulerGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddPatientBTN;
     private javax.swing.JLabel AllPatientsLBL;
     private javax.swing.JTextArea AllPatientsTA;
     private javax.swing.JPanel MainPanel;

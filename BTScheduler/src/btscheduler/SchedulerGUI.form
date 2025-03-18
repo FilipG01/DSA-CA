@@ -61,19 +61,23 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="NextPatientBTN" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="NextPatientLBL" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jScrollPane1" pref="560" max="32767" attributes="0"/>
+                                      <Component id="ShowAllPatientsBTN" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ShowNoShowBTN" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="NextPatientBTN" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace pref="263" max="32767" attributes="0"/>
+                                              <Component id="AddPatientBTN" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="NextPatientLBL" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                                           <Component id="AllPatientsLBL" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="ShowAllPatientsBTN" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ShowNoShowBTN" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="16" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="17" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -92,7 +96,10 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="100" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="NextPatientBTN" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="NextPatientBTN" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="AddPatientBTN" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="AllPatientsLBL" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -178,12 +185,17 @@
         </Container>
         <Component class="javax.swing.JButton" name="NextPatientBTN">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Next Patient"/>
+            <Property name="text" type="java.lang.String" value="Patient Processed"/>
+            <Property name="toolTipText" type="java.lang.String" value="Deletes Selected Patient"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NextPatientBTNActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="ShowAllPatientsBTN">
           <Properties>
             <Property name="text" type="java.lang.String" value="Show All Patients"/>
+            <Property name="toolTipText" type="java.lang.String" value="Displays all users in pqueue"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ShowAllPatientsBTNActionPerformed"/>
@@ -195,6 +207,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ShowNoShowBTNActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="AddPatientBTN">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Opens Add Patient window"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddPatientBTNActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

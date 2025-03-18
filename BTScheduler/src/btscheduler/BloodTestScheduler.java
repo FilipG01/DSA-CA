@@ -50,11 +50,20 @@ public class BloodTestScheduler {
 
     // Remove and return the next patient (for late application)
     public Patient getNextPerson() {
-        Patient next = queue.poll(); // Remove from queue
-        if (next != null) {
-            allPatients.remove(next); // Remove from allPatients list
-            FileIOManager.savePatients(allPatients); // Update file after removal
-        }
-        return next;
+    Patient next = queue.poll(); // Remove highest-priority patient from queue
+
+    if (next != null) {
+        allPatients.remove(next); // Remove from the list
+        FileIOManager.savePatients(allPatients); // Update patients.txt
+    }
+    return next;
+}
+    
+     // Add a new patient to the system
+    public void addPerson(String name, String priority, int age, boolean fromHospital, String gp) {
+        Patient newPatient = new Patient(name, priority, age, fromHospital, gp);
+        queue.add(newPatient); // Add to priority queue
+        allPatients.add(newPatient); // Add to list for saving
+        FileIOManager.savePatients(allPatients); // Save updated list to file
     }
 }
